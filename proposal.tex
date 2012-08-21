@@ -75,11 +75,24 @@ Computational reputation is a mechanism that could be used for this, but in a ma
 %The paradox in the network is seen by opening the road between $A$ and $B$. Now the optimal choice is to drive to $B$, take the newly opened road to $A$ and drive to the finish. For both roads $T = 4000$, resulting in a total expected travel time of $80$ for all cars.
 
 \subsection{What should be done with received information?}
+The other side of the problem is to consider the information from the receiver's point of view. Upon receiving new information, a driver must decide firstly whether that information is trustworthy or not and secondly whether it is relevant to her current plan. Finally, she may have to replan, taking the new information into account.
+
+There is already a large amount of work on planning in dynamic environments \cite{Buriol2008} and we aim to use that. Rather we focus on the dual problems of deciding what information to trust and how that information should be incorporated into the agent's reasoning model.
+
+These problems have received less attention. They are the reverse side of the same coin we discussed above. When asking "what information should be sent?", the aim is to incentivize the sender to send truthful and useful information. However, the very nature of traffic provides incentives to do exactly the reverse. It is thus up to the receiving agent to distinguish truthful and useful information, from the other received messages.
+
+There are two general approaches to deciding whether information is truthful or not. The first is to evaluate the trustworthiness of the source. The second is to assess the information directly and try to collect corroborating, or contradicting evidence. For instance, if multiple independent sources say the same thing and nobody contradicts it, it is more likely to be true. Neither method is without problem in the context of a VANET.
+
+A large majority of trust models rely on repeat interactions with an individual to learn an evaluation of that individual. In addition, many take communicated evaluations from peers into account, or rely on a centralized source of reputation information. In a road network, we cannot expect any of this information to be available. The chance of a repeat interaction with the same car is small and even finding a driver who has interacted with a specific agent before is small, and if possible will almost invariably take too long for real-time decision making in traffic. A centralized source of reputational information, such as available on websites such as eBay, cannot be accessed efficiently through a VANET and would require a secondary connection through a fixed network to function reliably. Conventional trust models are thus incapable of dealing with the sparse, dynamic environment of traffic. We propose to focus on trust models that can generalize and use stereotypes rather than, or in addition to, individuals \cite{Burnett2010}. For instance, it is likely that traffic heading in the opposite direction will be more trustworthy than traffic heading in the same direction. Machine learning can be used to discern between attributes of senders that are correlated with sending truthful information.
+
+Additionally, the trustworthiness of the message itself can be tested by receiving messages from multiple agents about the same subject. By combining such a comparative approach with a stereotype based trust model we aim to create a robust trust model for application in VANETs.
+
+This trust model evaluates the trustworthiness of a piece of information. However, its relevance to the agent can only be evaluated if we can reason about such concepts as goals. We thus provide to integrate the trust model into a cognitive agent model. The agent's internal reasoning allows for informed decisions about when and where to replan. For instance, if the agent has time to replan before the next major intersection and has received information that its current path is blocked, it is a good time to replan. If the next offramp off a highway is still 10 minutes away, then it is better to wait for new information. This also means the path planning algorithm must be integrated into the cognitive agent model. We propose to use the Possibilistic BDI model \cite{CostaPerreira2010}. This model not only provides a cognitive BDI model, but provides the explicit means for reasoning about the uncertainty inherent in more --- or less --- trusted information.
+
 
 
 \section{State of the Art}
 \section{Objectives and Workplan}
-We each write our own workplan here
 
 \bibliographystyle{plain}
 \bibliography{proposal}
