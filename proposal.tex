@@ -37,11 +37,17 @@ This is merely one example of withholding information leading to better overall 
 
 It is thus clear that smart choices must be made in what information is communicated between cars. Another, unrelated, issue is the scalability of the network. Scheuermann et al. \cite{Scheuermann2009} show that aggregation of data is a necessity of vehicular ad-hoc networks (VANETs), the predominant communication method for inter-vehicular communication. Furthermore, for any scalable aggregation method, the amount of information that can be received depends on the geographical distance from which it originates in a non-linear manner. In fact, the amount of bandwidth used must be in $o(1/d^2)$, where $d$ is the geographical distance. If this is not the case, then the VANET runs the risk of being overloaded. In practice this means that the obtainable level of detail for information about the road network decreases with distance. It is therefore important to choose carefully what is communicated to agents far away. For instance, it might be important to know about an accident on a road far away, but may not be important to know that the car reporting that is heading west at 60 km/hour.
 
+In addressing what should be communicated we assume drivers are autonomous: there may be decentralized mechanisms in place, such as the use of reputation, to incentivize good behaviour and it may be realistic to assume that extreme misuse of the system could be punished by a central authority in the same way current traffic infractions are punished by the police. However, we do not assume such a system is foolproof and individuals may misuse the communication system for their own benefit. It is up to receiving vehicles to make sense of received information and put it to good use. More on this in the next section; we mentioned it here to emphasize that it is necessary to take into account that what ``should'' be communicated by vehicles may not always be what the vehicles do communicate. Nevertheless, we will assume that the cost of communication is zero. With this we mean that if a vehicle has information that does not affect its own arrival time directly, then the agent does not lose anything by communicating this information to other cars. For instance, if there is a traffic jam on the road going from $A$ to $B$, it costs nothing for cars that are travelling in the opposite direction, from $B$ to $A$, to communicate this. Similarly if there is a patch of ice on the road, cars do not incur a cost broadcasting this information to their neighbours. 
 
+If, on the other hand, the information affects the sender's travel time,  we assume that there is a cost in communicating that is proportional to the expected increase in travel time. For direct communication between vehicles to be beneficial in traffic management we thus need a way to manage it that:
+\begin{itemize}
+  \item incentivizes local, rather than long-distance communication
+  \item incentivizes truthful communication of important information
+  \item reduces communication of irrelevant information
+  \item incentivizes vehicles to communicate truthfully
+\end{itemize}
 
-
-
-
+Computational reputation is a mechanism that could be used for this, but in a massive, decentralized system such as a VANET, where discovering the reputation of a communication partner is itself not without problems \cite{Zhang2011} and current solutions cannot be applied immediately in VANETs. We aim to develop a reputation mechanism that serves two purposes: firstly it allows receivers to decide whether the received information is trustworthy or not, and secondly it incentivizes senders to act in the best interest of the community. 
 
 %In Figure \ref{fig:braess} we draw the road network of the Braess paradox. In the paradox, travel along the roads from $Start$ to $A$ and from $B$ to $Finish$ do not take a fixed amount of time, but are dependent on $T$. $T$ is the total number of cars driving along that road, so if $T = 1000$ then it takes $t = 10$ to drive along the road. The dashed road between $A$ and $B$ may be open or closed and takes a negligible amount of time to drive along. There are a total of 4000 cars driving from $Start$ to $Finish$. 
 %\begin{figure}
@@ -68,7 +74,8 @@ It is thus clear that smart choices must be made in what information is communic
 %
 %The paradox in the network is seen by opening the road between $A$ and $B$. Now the optimal choice is to drive to $B$, take the newly opened road to $A$ and drive to the finish. For both roads $T = 4000$, resulting in a total expected travel time of $80$ for all cars.
 
-\subsection{What  should be done with received information?}
+\subsection{What should be done with received information?}
+
 
 \section{State of the Art}
 \section{Objectives and Workplan}
